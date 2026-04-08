@@ -65,13 +65,13 @@ export function Dashboard() {
     try {
       const formatted = await transcribeAndFormat(blob)
       setFormattedNote(formatted)
-      setRawTranscript('') // raw is inside formatted already
+      setRawTranscript('')
       setAppState(STATE.DONE)
 
       // Save to Supabase
       await supabase.from('notes').insert({
         user_id: user.id,
-        raw_transcript: formatted, // Gemini returns the full structured note
+        raw_transcript: formatted,
         formatted_note: formatted,
       })
     } catch (err) {
@@ -108,9 +108,12 @@ export function Dashboard() {
         <span className="font-extrabold text-xl text-slate-900">
           Field<span className="text-red-500">Dictate</span>
         </span>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           <Link to="/history" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
             History
+          </Link>
+          <Link to="/pricing" className="text-slate-500 font-semibold text-sm hover:text-emerald-600 transition-colors">
+            Upgrade
           </Link>
           <button onClick={handleSignOut} className="text-slate-500 font-semibold text-sm hover:text-red-500 transition-colors">
             Sign Out
@@ -208,4 +211,3 @@ export function Dashboard() {
     </div>
   )
 }
-
