@@ -1,6 +1,6 @@
 /**
  * Sends audio blob to Gemini API for transcription and formatting.
- * Uses the gemini-2.0-flash model with inline audio data.
+ * Uses the gemini-2.5-flash model with inline audio data.
  */
 export async function transcribeAndFormat(audioBlob) {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY
@@ -45,7 +45,7 @@ Return ONLY the formatted note. Do not include any preamble or explanation.`,
   }
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
