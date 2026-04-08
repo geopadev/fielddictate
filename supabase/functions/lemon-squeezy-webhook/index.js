@@ -1,5 +1,18 @@
-// @ts-nocheck — This file runs on Supabase's Deno runtime, not Node.js.
-// jsr: imports are Deno-specific and will not resolve in VS Code. That is expected.
+/**
+ * Lemon Squeezy Webhook Handler — Supabase Edge Function
+ *
+ * This file runs on Supabase's Deno runtime (not Node.js).
+ * It is kept here as a local reference copy. The live version
+ * is deployed directly to Supabase via the MCP or CLI.
+ *
+ * Webhook URL:
+ *   https://dscqnpyxcyrlcwyrgpwj.supabase.co/functions/v1/lemon-squeezy-webhook
+ *
+ * Required Supabase Secrets:
+ *   - LEMONSQUEEZY_WEBHOOK_SECRET
+ *   - SUPABASE_URL          (auto-provided)
+ *   - SUPABASE_SERVICE_ROLE_KEY (auto-provided)
+ */
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
@@ -9,11 +22,7 @@ const WEBHOOK_SECRET = Deno.env.get("LEMONSQUEEZY_WEBHOOK_SECRET") ?? "";
  * Verifies Lemon Squeezy webhook signature using HMAC-SHA256.
  * The signature is sent in the `x-signature` header.
  */
-async function verifySignature(
-  body: string,
-  signature: string,
-  secret: string
-): Promise<boolean> {
+async function verifySignature(body, signature, secret) {
   if (!secret || !signature) return false;
 
   const encoder = new TextEncoder();
@@ -38,7 +47,7 @@ async function verifySignature(
   return hashHex === signature;
 }
 
-Deno.serve(async (req: Request) => {
+Deno.serve(async (req) => {
   // Only accept POST requests
   if (req.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
@@ -54,17 +63,17 @@ Deno.serve(async (req: Request) => {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  let payload: Record<string, unknown>;
+  let payload;
   try {
     payload = JSON.parse(body);
   } catch {
     return new Response("Invalid JSON", { status: 400 });
   }
 
-  const meta = payload?.meta as Record<string, unknown>;
-  const eventName = meta?.event_name as string;
-  const customData = meta?.custom_data as Record<string, unknown>;
-  const userId = customData?.user_id as string;
+  const meta = payload?.meta;
+  const eventName = meta?.event_name;
+  const customData = meta?.custom_data;
+  const userId = customData?.user_id;
 
   // Create a Supabase admin client — bypasses RLS
   const supabase = createClient(

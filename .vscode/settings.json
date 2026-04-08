@@ -1,5 +1,2 @@
 {
-  "deno.enablePaths": ["supabase/functions"],
-  "deno.unstable": true,
-  "deno.path": "C:\\Users\\Georg\\.deno\\bin\\deno.exe"
 }
