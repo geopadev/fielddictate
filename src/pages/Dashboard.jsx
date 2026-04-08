@@ -68,12 +68,14 @@ export function Dashboard() {
       setRawTranscript('')
       setAppState(STATE.DONE)
 
-      // Save to Supabase
-      await supabase.from('notes').insert({
-        user_id: user.id,
-        raw_transcript: formatted,
-        formatted_note: formatted,
-      })
+      // Save to Supabase (Pro feature only)
+      if (user?.isPro) {
+        await supabase.from('notes').insert({
+          user_id: user.id,
+          raw_transcript: formatted,
+          formatted_note: formatted,
+        })
+      }
     } catch (err) {
       console.error(err)
       setError(err.message || 'Something went wrong. Please try again.')

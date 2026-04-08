@@ -8,15 +8,35 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    async function fetchProfile(sessionUser) {
+      if (!sessionUser) {
+        setUser(null)
+        setLoading(false)
+        return
+      }
+      try {
+        const { data } = await supabase
+          .from('users')
+          .select('subscription_active')
+          .eq('id', sessionUser.id)
+          .single()
+        
+        setUser({ ...sessionUser, isPro: data?.subscription_active || false })
+      } catch (err) {
+        setUser({ ...sessionUser, isPro: false })
+      } finally {
+        setLoading(false)
+      }
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      setLoading(false)
+      fetchProfile(session?.user)
     })
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
+      fetchProfile(session?.user)
     })
 
     return () => subscription.unsubscribe()
