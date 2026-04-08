@@ -108,7 +108,10 @@ export function History() {
           <Link to="/dashboard" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
             ← Dashboard
           </Link>
-          <h1 className="text-xl font-extrabold text-slate-900">Note History</h1>
+          <Link to="/contact" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+            Contact
+          </Link>
+          <h1 className="text-xl font-extrabold text-slate-900 ml-2">Note History</h1>
         </div>
         {notes.length > 0 && (
           <span className="bg-slate-200 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full">

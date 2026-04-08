@@ -5,6 +5,7 @@ import { LandingPage } from './pages/LandingPage'
 import { Dashboard } from './pages/Dashboard'
 import { History } from './pages/History'
 import { Pricing } from './pages/Pricing'
+import { Contact } from './pages/Contact'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
       </Routes>

@@ -41,7 +41,10 @@ export function Pricing() {
         <Link to="/" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
           ← Home
         </Link>
-        <h1 className="text-xl font-extrabold text-slate-900">Pricing</h1>
+        <Link to="/contact" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+          Contact
+        </Link>
+        <h1 className="text-xl font-extrabold text-slate-900 ml-auto">Pricing</h1>
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center py-8 gap-8">

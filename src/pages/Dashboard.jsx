@@ -114,6 +114,9 @@ export function Dashboard() {
           <Link to="/history" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
             History
           </Link>
+          <Link to="/contact" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+            Contact
+          </Link>
           <Link to="/pricing" className="text-slate-500 font-semibold text-sm hover:text-emerald-600 transition-colors">
             Upgrade
           </Link>
