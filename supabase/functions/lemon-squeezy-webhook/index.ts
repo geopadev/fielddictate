@@ -1,4 +1,6 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+// @ts-nocheck — This file runs on Supabase's Deno runtime, not Node.js.
+// jsr: imports are Deno-specific and will not resolve in VS Code. That is expected.
+
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 const WEBHOOK_SECRET = Deno.env.get("LEMONSQUEEZY_WEBHOOK_SECRET") ?? "";
