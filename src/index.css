@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Slate-50 background and Slate-900 text are set on the body in index.html */
+  
+  html, body, #root {
+    @apply min-h-screen m-0 p-0;
+  }
+}
