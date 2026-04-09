@@ -30,14 +30,15 @@ The audio above is a voice note recorded in the field.
 
 Please:
 1. Transcribe the audio accurately.
-2. Format the transcription into a clean, professional job note with the following sections where relevant:
+2. If there is no speech, only ambient noise, or the audio is silent, return EXACTLY the text: SILENCE_DETECTED
+3. Otherwise, format the transcription into a clean, professional job note with the following sections where relevant:
    - **Job Summary**: One sentence overview.
    - **Work Performed**: Bullet points of tasks completed.
    - **Parts / Materials Used**: List any mentioned parts or materials.
    - **Next Steps / Follow-up**: Any outstanding actions.
    - **Notes**: Any other relevant information.
 
-Return ONLY the formatted note. Do not include any preamble or explanation.`,
+Return ONLY the formatted note or the silence flag. Do not include any preamble or explanation.`,
           },
         ],
       },
@@ -60,5 +61,11 @@ Return ONLY the formatted note. Do not include any preamble or explanation.`,
 
   const data = await response.json()
   const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
-  return rawText.trim()
+  const trimmedText = rawText.trim()
+  
+  if (trimmedText.includes('SILENCE_DETECTED') || trimmedText === '') {
+    throw new Error('No speech was detected in the recording. Please try speaking clearly or moving closer to your microphone.')
+  }
+
+  return trimmedText
 }
