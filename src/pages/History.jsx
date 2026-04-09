@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
+import { ThemeToggle } from '../components/ThemeToggle'
 
 function NoteCard({ note }) {
   const [expanded, setExpanded] = useState(false)
@@ -31,14 +32,14 @@ function NoteCard({ note }) {
 
   return (
     <div
-      className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden cursor-pointer active:scale-[0.99] transition-transform"
+      className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden cursor-pointer active:scale-[0.99] transition-all"
       onClick={() => setExpanded(e => !e)}
     >
       {/* Card header */}
       <div className="flex items-center justify-between px-5 py-4 gap-3">
         <div className="flex-1 min-w-0">
-          <p className="text-slate-900 font-bold text-sm truncate">{preview}</p>
-          <p className="text-slate-400 text-xs font-medium mt-0.5">{formattedDate}</p>
+          <p className="text-slate-900 dark:text-white font-bold text-sm truncate transition-colors">{preview}</p>
+          <p className="text-slate-400 dark:text-slate-500 text-xs font-medium mt-0.5 transition-colors">{formattedDate}</p>
         </div>
         <div className="flex items-center gap-3 shrink-0">
           <button
@@ -59,8 +60,8 @@ function NoteCard({ note }) {
 
       {/* Expanded note body */}
       {expanded && (
-        <div className="border-t border-slate-100 px-5 py-4 bg-slate-50">
-          <pre className="text-slate-700 font-sans text-sm whitespace-pre-wrap leading-relaxed">
+        <div className="border-t border-slate-100 dark:border-slate-700 px-5 py-4 bg-slate-50 dark:bg-slate-900/50 transition-colors">
+          <pre className="text-slate-700 dark:text-slate-300 font-sans text-sm whitespace-pre-wrap leading-relaxed">
             {note.formatted_note}
           </pre>
         </div>
@@ -101,20 +102,21 @@ export function History() {
   }, [user])
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col max-w-2xl mx-auto w-full px-6">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
       <header className="flex items-center justify-between py-6">
         <div className="flex items-center gap-4">
-          <Link to="/dashboard" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+          <ThemeToggle />
+          <Link to="/dashboard" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             ← Dashboard
           </Link>
-          <Link to="/contact" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+          <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Contact
           </Link>
-          <h1 className="text-xl font-extrabold text-slate-900 ml-2">Note History</h1>
+          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white ml-2 transition-colors">Note History</h1>
         </div>
         {notes.length > 0 && (
-          <span className="bg-slate-200 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full">
+          <span className="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold px-2.5 py-1 rounded-full transition-colors">
             {notes.length} {notes.length === 1 ? 'note' : 'notes'}
           </span>
         )}
@@ -129,20 +131,20 @@ export function History() {
         )}
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-2xl p-5 mt-4">
-            <p className="text-red-600 font-semibold">{error}</p>
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl p-5 mt-4 transition-colors">
+            <p className="text-red-600 dark:text-red-400 font-semibold">{error}</p>
           </div>
         )}
 
         {!loading && !user?.isPro && (
           <div className="flex flex-col items-center justify-center py-24 gap-4 px-4 text-center">
-            <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-2xl flex items-center justify-center transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
               </svg>
             </div>
-            <p className="text-slate-900 font-extrabold text-xl">Note History is a Pro feature</p>
-            <p className="text-slate-500 text-sm font-medium max-w-sm">
+            <p className="text-slate-900 dark:text-white font-extrabold text-xl transition-colors">Note History is a Pro feature</p>
+            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium max-w-sm transition-colors">
               Upgrade to the Pro plan to automatically save all your job notes securely and access them anytime, anywhere.
             </p>
             <Link
@@ -156,13 +158,13 @@ export function History() {
 
         {!loading && user?.isPro && !error && notes.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
-            <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-400 dark:text-slate-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
               </svg>
             </div>
-            <p className="text-slate-500 font-semibold text-lg">No notes yet</p>
-            <p className="text-slate-400 text-sm">Head to the dashboard to record your first job note.</p>
+            <p className="text-slate-500 dark:text-slate-400 font-semibold text-lg transition-colors">No notes yet</p>
+            <p className="text-slate-400 dark:text-slate-500 text-sm transition-colors">Head to the dashboard to record your first job note.</p>
             <Link
               to="/dashboard"
               className="mt-2 px-6 py-3 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition-colors active:scale-95"

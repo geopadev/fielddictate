@@ -7,8 +7,11 @@ import { History } from './pages/History'
 import { Pricing } from './pages/Pricing'
 import { Contact } from './pages/Contact'
 import { UpdatePassword } from './pages/UpdatePassword'
+import { useDarkMode } from './hooks/useDarkMode'
 
 function App() {
+  useDarkMode()
+
   return (
     <AuthProvider>
       <Routes>

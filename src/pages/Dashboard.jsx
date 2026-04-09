@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { transcribeAndFormat } from '../lib/gemini'
+import { ThemeToggle } from '../components/ThemeToggle'
 
 const STATE = {
   IDLE: 'idle',
@@ -104,23 +105,24 @@ export function Dashboard() {
   const isProcessing = appState === STATE.PROCESSING
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col max-w-2xl mx-auto w-full px-6">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
       <header className="flex justify-between items-center py-6">
-        <span className="font-extrabold text-xl text-slate-900">
+        <span className="font-extrabold text-xl text-slate-900 dark:text-white">
           Field<span className="text-red-500">Dictate</span>
         </span>
         <div className="flex items-center gap-4">
-          <Link to="/history" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+          <ThemeToggle />
+          <Link to="/history" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             History
           </Link>
-          <Link to="/contact" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+          <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Contact
           </Link>
-          <Link to="/pricing" className="text-slate-500 font-semibold text-sm hover:text-emerald-600 transition-colors">
+          <Link to="/pricing" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
             Upgrade
           </Link>
-          <button onClick={handleSignOut} className="text-slate-500 font-semibold text-sm hover:text-red-500 transition-colors">
+          <button onClick={handleSignOut} className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-red-500 dark:hover:text-red-400 transition-colors">
             Sign Out
           </button>
         </div>
@@ -155,7 +157,7 @@ export function Dashboard() {
                 </>
               )}
             </button>
-            <p className="text-slate-500 font-medium">
+            <p className="text-slate-500 dark:text-slate-400 font-medium transition-colors">
               {isRecording ? '🔴 Recording... tap to stop' : 'Speak your job notes clearly'}
             </p>
           </div>
@@ -166,16 +168,16 @@ export function Dashboard() {
           <div className="flex flex-col items-center gap-6 py-8">
             <div className="w-20 h-20 border-4 border-red-500 border-t-transparent rounded-full animate-spin" />
             <div className="text-center">
-              <p className="text-xl font-extrabold text-slate-900">Processing your note...</p>
-              <p className="text-slate-500 font-medium mt-1">Gemini AI is formatting your note</p>
+              <p className="text-xl font-extrabold text-slate-900 dark:text-white transition-colors">Processing your note...</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium mt-1 transition-colors">Gemini AI is formatting your note</p>
             </div>
           </div>
         )}
 
         {/* Error state */}
         {appState === STATE.ERROR && error && (
-          <div className="w-full bg-red-50 border border-red-200 rounded-2xl p-5">
-            <p className="text-red-600 font-semibold">{error}</p>
+          <div className="w-full bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl p-5">
+            <p className="text-red-600 dark:text-red-400 font-semibold">{error}</p>
             <button onClick={handleReset} className="mt-3 text-sm font-bold text-red-500 hover:text-red-700 underline">
               Try again
             </button>
@@ -186,15 +188,15 @@ export function Dashboard() {
         {appState === STATE.DONE && formattedNote && (
           <div className="w-full flex flex-col gap-4">
             <div className="flex justify-between items-center">
-              <h2 className="text-lg font-extrabold text-slate-900">Your Job Note</h2>
-              <button onClick={handleReset} className="text-sm font-bold text-slate-400 hover:text-slate-900 transition-colors">
+              <h2 className="text-lg font-extrabold text-slate-900 dark:text-white transition-colors">Your Job Note</h2>
+              <button onClick={handleReset} className="text-sm font-bold text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
                 + New Note
               </button>
             </div>
 
             {/* Note output */}
-            <div className="w-full bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-              <pre className="text-slate-800 font-sans text-sm whitespace-pre-wrap leading-relaxed">
+            <div className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm transition-colors">
+              <pre className="text-slate-800 dark:text-slate-200 font-sans text-sm whitespace-pre-wrap leading-relaxed">
                 {formattedNote}
               </pre>
             </div>

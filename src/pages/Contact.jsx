@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { ThemeToggle } from '../components/ThemeToggle'
 
 export function Contact() {
   const { user } = useAuth()
@@ -42,17 +43,18 @@ export function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col max-w-2xl mx-auto w-full px-6">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
       <header className="flex justify-between items-center py-6">
-        <Link to="/" className="font-extrabold text-xl text-slate-900">
+        <Link to="/" className="font-extrabold text-xl text-slate-900 dark:text-white transition-colors">
           Field<span className="text-red-500">Dictate</span>
         </Link>
         <div className="flex items-center gap-4">
-          <Link to="/dashboard" className="text-slate-500 font-semibold text-sm hover:text-slate-900 transition-colors">
+          <ThemeToggle />
+          <Link to="/dashboard" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Dashboard
           </Link>
-          <Link to="/history" className="text-slate-500 font-semibold text-sm hover:text-emerald-600 transition-colors">
+          <Link to="/history" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
             History
           </Link>
         </div>
@@ -61,23 +63,23 @@ export function Contact() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col py-6 pb-12">
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Contact Us</h1>
-          <p className="text-slate-500 font-medium">Have an issue or a feature request? Let us know!</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 transition-colors">Contact Us</h1>
+          <p className="text-slate-500 dark:text-slate-400 font-medium transition-colors">Have an issue or a feature request? Let us know!</p>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-sm transition-colors">
           {status === 'SUCCESS' ? (
             <div className="flex flex-col items-center justify-center text-center py-12 gap-4">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-extrabold text-slate-900">Message Sent!</h2>
-              <p className="text-slate-500">We've received your message and will get back to you soon.</p>
+              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white transition-colors">Message Sent!</h2>
+              <p className="text-slate-500 dark:text-slate-400 transition-colors">We've received your message and will get back to you soon.</p>
               <button 
                 onClick={() => setStatus('IDLE')}
-                className="mt-4 px-6 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
+                className="mt-4 px-6 py-2 bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
               >
                 Send another message
               </button>
@@ -86,20 +88,20 @@ export function Contact() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               {/* Name */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="name" className="text-sm font-bold text-slate-700">Name</label>
+                <label htmlFor="name" className="text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">Name</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
                   required
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                 />
               </div>
 
               {/* Email */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="email" className="text-sm font-bold text-slate-700">Email Address</label>
+                <label htmlFor="email" className="text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">Email Address</label>
                 <input
                   type="email"
                   name="email"
@@ -107,27 +109,27 @@ export function Contact() {
                   required
                   defaultValue={user?.email || ''}
                   placeholder="john@example.com"
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                 />
               </div>
 
               {/* Message */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="message" className="text-sm font-bold text-slate-700">Message</label>
+                <label htmlFor="message" className="text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">Message</label>
                 <textarea
                   name="message"
                   id="message"
                   required
                   rows="5"
                   placeholder="How can we help?"
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                 ></textarea>
               </div>
 
               {/* Error Message */}
               {status === 'ERROR' && (
-                <div className="p-3 bg-red-50 rounded-lg border border-red-100">
-                  <p className="text-sm text-red-600 font-semibold">{errorMessage}</p>
+                <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800/50 transition-colors">
+                  <p className="text-sm text-red-600 dark:text-red-400 font-semibold transition-colors">{errorMessage}</p>
                 </div>
               )}
 

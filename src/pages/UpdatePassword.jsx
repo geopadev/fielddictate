@@ -55,41 +55,41 @@ export function UpdatePassword() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col">
       <header className="py-6 flex justify-center">
-        <Link to="/" className="font-extrabold text-xl text-slate-900">
+        <Link to="/" className="font-extrabold text-xl text-slate-900 dark:text-white transition-colors">
           Field<span className="text-red-500">Dictate</span>
         </Link>
       </header>
       
       <main className="flex-1 flex flex-col items-center justify-center px-6 py-8">
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-sm p-8">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-8 transition-colors">
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-extrabold text-slate-900">Set New Password</h2>
-            <p className="text-slate-500 text-sm mt-1">Please enter your new password below.</p>
+            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white transition-colors">Set New Password</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 transition-colors">Please enter your new password below.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-1">New Password</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1 transition-colors">New Password</label>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-4 py-3 text-slate-900 bg-slate-50 border border-slate-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 py-3 text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-1">Confirm New Password</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1 transition-colors">Confirm New Password</label>
               <input
                 type="password"
                 required
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-4 py-3 text-slate-900 bg-slate-50 border border-slate-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 py-3 text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors"
               />
             </div>
 
@@ -107,7 +107,7 @@ export function UpdatePassword() {
             {error && (
                <Link
                to="/"
-               className="block text-center mt-4 text-sm font-bold text-slate-500 hover:text-slate-700 underline"
+               className="block text-center mt-4 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 underline transition-colors"
              >
                Return to Login
              </Link>
