@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { ThemeToggle } from '../components/ThemeToggle'
+import { ProBadge } from '../components/ProBadge'
 
 function NoteCard({ note }) {
   const [expanded, setExpanded] = useState(false)
@@ -113,7 +114,10 @@ export function History() {
           <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Contact
           </Link>
-          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white sm:ml-2 transition-colors w-full text-center sm:w-auto sm:text-left">Note History</h1>
+          <h1 className="flex items-center gap-2 text-xl font-extrabold text-slate-900 dark:text-white sm:ml-2 transition-colors w-full text-center sm:w-auto sm:text-left">
+            Note History
+            <ProBadge />
+          </h1>
         </div>
         {notes.length > 0 && (
           <span className="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold px-2.5 py-1 rounded-full transition-colors">

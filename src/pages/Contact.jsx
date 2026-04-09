@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { ThemeToggle } from '../components/ThemeToggle'
+import { ProBadge } from '../components/ProBadge'
 
 export function Contact() {
   const { user } = useAuth()
@@ -46,8 +47,9 @@ export function Contact() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
       <header className="flex flex-col sm:flex-row justify-between items-center py-6 gap-4">
-        <Link to="/" className="font-extrabold text-xl text-slate-900 dark:text-white transition-colors">
+        <Link to="/" className="flex items-center gap-2 font-extrabold text-xl text-slate-900 dark:text-white transition-colors">
           Field<span className="text-red-500">Dictate</span>
+          <ProBadge />
         </Link>
         <div className="flex items-center justify-center flex-wrap gap-4 sm:gap-6">
           <ThemeToggle />

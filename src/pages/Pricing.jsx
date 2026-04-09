@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { ThemeToggle } from '../components/ThemeToggle'
+import { ProBadge } from '../components/ProBadge'
 
 // Lemon Squeezy checkout overlay - loads their script once
 function useLemonSqueezy() {
@@ -47,7 +48,10 @@ export function Pricing() {
           <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Contact
           </Link>
-          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white sm:ml-2 transition-colors w-full text-center sm:w-auto sm:text-left">Pricing</h1>
+          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white sm:ml-2 transition-colors w-full text-center sm:w-auto sm:text-left flex items-center gap-2">
+            Pricing
+            <ProBadge />
+          </h1>
         </div>
       </header>
 
@@ -100,15 +104,28 @@ export function Pricing() {
           </ul>
 
           {/* Lemon Squeezy Overlay Checkout Button */}
-          <a
-            href={checkoutUrl}
-            className="lemonsqueezy-button block w-full py-4 text-center bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-lg rounded-xl shadow-lg transition-all active:scale-95"
-          >
-            Subscribe Now →
-          </a>
-          <p className="text-slate-500 text-xs text-center mt-3 font-medium">
-            Cancel anytime · Secure checkout by Lemon Squeezy
-          </p>
+          {user?.isPro ? (
+            <div className="space-y-2">
+              <div className="w-full py-4 text-center bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 font-extrabold text-lg rounded-xl cursor-default select-none">
+                ✓ Already Subscribed
+              </div>
+              <p className="text-slate-500 text-xs text-center font-medium">
+                You're on the Pro plan — enjoy unlimited access!
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <a
+                href={checkoutUrl}
+                className="lemonsqueezy-button block w-full py-4 text-center bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-lg rounded-xl shadow-lg transition-all active:scale-95"
+              >
+                Subscribe Now →
+              </a>
+              <p className="text-slate-500 text-xs text-center font-medium">
+                Cancel anytime · Secure checkout by Lemon Squeezy
+              </p>
+            </div>
+          )}
         </div>
       </main>
 

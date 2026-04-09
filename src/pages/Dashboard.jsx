@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { transcribeAndFormat } from '../lib/gemini'
 import { ThemeToggle } from '../components/ThemeToggle'
+import { ProBadge } from '../components/ProBadge'
 
 const STATE = {
   IDLE: 'idle',
@@ -108,8 +109,9 @@ export function Dashboard() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
       <header className="flex flex-col sm:flex-row justify-between items-center py-6 gap-4">
-        <span className="font-extrabold text-xl text-slate-900 dark:text-white">
+        <span className="flex items-center gap-2 font-extrabold text-xl text-slate-900 dark:text-white">
           Field<span className="text-red-500">Dictate</span>
+          <ProBadge />
         </span>
         <div className="flex items-center justify-center flex-wrap gap-4 sm:gap-6">
           <ThemeToggle />
@@ -119,9 +121,11 @@ export function Dashboard() {
           <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Contact
           </Link>
-          <Link to="/pricing" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-            Upgrade
-          </Link>
+          {!user?.isPro && (
+            <Link to="/pricing" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+              Upgrade
+            </Link>
+          )}
           <button onClick={handleSignOut} className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-red-500 dark:hover:text-red-400 transition-colors">
             Sign Out
           </button>
