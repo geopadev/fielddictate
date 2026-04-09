@@ -29,16 +29,18 @@ export async function transcribeAndFormat(audioBlob) {
 The audio above is a voice note recorded in the field.
 
 Please:
-1. Transcribe the audio accurately.
+1. Detect the language spoken in the audio.
 2. If there is no speech, only ambient noise, or the audio is silent, return EXACTLY the text: SILENCE_DETECTED
-3. Otherwise, format the transcription into a clean, professional job note with the following sections where relevant:
-   - **Job Summary**: One sentence overview.
-   - **Work Performed**: Bullet points of tasks completed.
-   - **Parts / Materials Used**: List any mentioned parts or materials.
-   - **Next Steps / Follow-up**: Any outstanding actions.
-   - **Notes**: Any other relevant information.
+3. Otherwise, transcribe the audio accurately and format it into a clean, professional job note.
+4. Write the ENTIRE note — including all section headers — in the SAME language that was spoken in the audio. Do NOT translate to English.
+5. Use the following sections where relevant, translated into the detected language:
+   - A one-sentence job summary.
+   - Bullet points of tasks completed.
+   - List of any parts or materials mentioned.
+   - Any outstanding next steps or follow-up actions.
+   - Any other relevant notes.
 
-Return ONLY the formatted note or the silence flag. Do not include any preamble or explanation.`,
+Return ONLY the formatted note or the silence flag. Do not include any preamble, language label, or explanation.`,
           },
         ],
       },
