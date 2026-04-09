@@ -38,15 +38,17 @@ export function Pricing() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
-      <header className="flex items-center gap-4 py-6">
-        <ThemeToggle />
-        <Link to="/" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
-          ← Home
-        </Link>
-        <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
-          Contact
-        </Link>
-        <h1 className="text-xl font-extrabold text-slate-900 dark:text-white ml-auto transition-colors">Pricing</h1>
+      <header className="flex flex-col-reverse sm:flex-row items-center justify-between py-6 gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <ThemeToggle />
+          <Link to="/" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
+            ← Home
+          </Link>
+          <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
+            Contact
+          </Link>
+          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white sm:ml-2 transition-colors w-full text-center sm:w-auto sm:text-left">Pricing</h1>
+        </div>
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center py-8 gap-8">

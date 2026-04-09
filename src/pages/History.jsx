@@ -104,8 +104,8 @@ export function History() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
-      <header className="flex items-center justify-between py-6">
-        <div className="flex items-center gap-4">
+      <header className="flex flex-col-reverse sm:flex-row items-center justify-between py-6 gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <ThemeToggle />
           <Link to="/dashboard" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             ← Dashboard
@@ -113,7 +113,7 @@ export function History() {
           <Link to="/contact" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             Contact
           </Link>
-          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white ml-2 transition-colors">Note History</h1>
+          <h1 className="text-xl font-extrabold text-slate-900 dark:text-white sm:ml-2 transition-colors w-full text-center sm:w-auto sm:text-left">Note History</h1>
         </div>
         {notes.length > 0 && (
           <span className="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold px-2.5 py-1 rounded-full transition-colors">

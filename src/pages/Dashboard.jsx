@@ -107,11 +107,11 @@ export function Dashboard() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col max-w-2xl mx-auto w-full px-6">
       {/* Header */}
-      <header className="flex justify-between items-center py-6">
+      <header className="flex flex-col sm:flex-row justify-between items-center py-6 gap-4">
         <span className="font-extrabold text-xl text-slate-900 dark:text-white">
           Field<span className="text-red-500">Dictate</span>
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center flex-wrap gap-4 sm:gap-6">
           <ThemeToggle />
           <Link to="/history" className="text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-slate-900 dark:hover:text-white transition-colors">
             History
